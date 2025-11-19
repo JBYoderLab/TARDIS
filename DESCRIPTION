@@ -1,0 +1,19 @@
+Package: TARDIS
+Title: Temporal Analysis of Reproduction Distributed in Space
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Jeremy B.", 
+           family = "Yoder", 
+           email = "jeremy.b.yoder@pm.me", 
+           role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0002-5630-0921")
+          )
+Description: TARDIS is a pipeline to model demographic processes in natural populations using observations dispersed in time and space. This package includes functions to acquire and manage suitable training data from the iNaturalist crowdsourcing database, match training records to environmental predictor layers, train and evaluate models, predict from new data, and summarize and analyze predicted trends over time and space.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    dplyr,
+    rinat,
+    utils
