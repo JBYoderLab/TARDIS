@@ -3,7 +3,7 @@ Temporal analysis of reproduction distributed in space
 
 A package for modeling population processes in relation to environmental variation, using observations distributed in spaaaace and tiiiime.
 
-🕦🪻🕐🌹🕥🌻🕝
+⌚️🪻⏳🌹⏲️🌻⏱️🌷🕰️
 
 README last updated 16 November 2025.
 

@@ -17,3 +17,5 @@ Imports:
     dplyr,
     rinat,
     utils
+URL: https://github.com/JBYoderLab/TARDIS
+BugReports: https://github.com/JBYoderLab/TARDIS/issues
