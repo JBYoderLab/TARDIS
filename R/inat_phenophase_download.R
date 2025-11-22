@@ -17,6 +17,7 @@
 #'
 
 inat_phenophase_download <- function(taxnum=NA, years=2021:2025, write.out=FALSE, max_loc_uncertainty=1000, verbose=TRUE){
+  stopifnot(is.numeric(taxnum), length(taxnum)==1, is.numeric(years))
 
   inat_pheno_data <- data.frame(matrix(0,0,7))
   names(inat_pheno_data) <- c("scientific_name", "latitude", "longitude", "url", "image_url", "observed_on", "phenology")

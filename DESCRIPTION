@@ -19,3 +19,6 @@ Imports:
     utils
 URL: https://github.com/JBYoderLab/TARDIS
 BugReports: https://github.com/JBYoderLab/TARDIS/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
