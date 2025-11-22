@@ -89,3 +89,4 @@ ehthumbs.db
 Thumbs.db
 *.Rproj
 .Rproj.user
+.quarto
