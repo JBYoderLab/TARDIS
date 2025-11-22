@@ -1,35 +1,35 @@
 # Download phenophase-annotated species records from iNaturalist
-# jby 2025.11.17
+# jby 2025.11.22
 #
-#' Download phenophase-annotated iNaturalist records
+#' Download iNaturalist records by annotated phenophase
 #'
-#' @param taxon Numeric taxon ID for a target taxon in the iNaturalsist database
+#' @param taxnum Numeric taxon ID for a target taxon in the iNaturalsist database
 #' @param years Vector of requested years of observation
-#' @param write_out Write out a .csv file with the requested records? If TRUE, creates "data/inat_phenology_data_<taxon ID>.csv" with the same content as the returned dataframe.
+#' @param write.out Write out a .csv file with the requested records? If TRUE, creates "data/inat_phenology_data_<taxon ID>.csv" with the same content as the returned dataframe.
 #' @param max_loc_uncertainty Maximum positional uncertainty for requested records, in meters
 #' @param verbose If TRUE, provide updates with each year of data downloaded.
 #'
-#' @returns A dataframe with simplified iNaturalist records, by phenophase
+#' @returns A dataframe with simplified iNaturalist records, by year and phenophase
 #' @export
 #'
-#' @examples toyon <- inat_phenophase_download(taxon=53405, years=2021)
+#' @examples toyon <- inat_phenophase_download(taxnum=53405, years=2010:2012)
 #'
 #'
 
-inat_phenophase_download <- function(taxon=NA, years=2021:2025, write_out=FALSE, max_loc_uncertainty=1000, verbose=TRUE){
+inat_phenophase_download <- function(taxnum=NA, years=2021:2025, write.out=FALSE, max_loc_uncertainty=1000, verbose=TRUE){
 
   inat_pheno_data <- data.frame(matrix(0,0,7))
   names(inat_pheno_data) <- c("scientific_name", "latitude", "longitude", "url", "image_url", "observed_on", "phenology")
 
   for(y in years){
 
-    bud.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxon, annotation=c(12, 15), year=y, maxresults=1e4))
+    bud.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxnum, annotation=c(12, 15), year=y, maxresults=1e4))
     Sys.sleep(5) # throttling under the API limit, maybe?
-    flo.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxon, annotation=c(12, 13), year=y, maxresults=1e4))
+    flo.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxnum, annotation=c(12, 13), year=y, maxresults=1e4))
     Sys.sleep(5)
-    fru.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxon, annotation=c(12, 14), year=y, maxresults=1e4))
+    fru.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxnum, annotation=c(12, 14), year=y, maxresults=1e4))
     Sys.sleep(5)
-    non.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxon, annotation=c(12, 21), year=y, maxresults=1e4))
+    non.y <- try(rinat::get_inat_obs(quality="research", taxon_id=taxnum, annotation=c(12, 21), year=y, maxresults=1e4))
     Sys.sleep(5)
 
 
@@ -43,10 +43,10 @@ inat_phenophase_download <- function(taxon=NA, years=2021:2025, write_out=FALSE,
 
     inat_pheno_data <- rbind(inat_pheno_data, bud.o, flo.o, fru.o, non.o)
 
-    if(write_out){
+    if(write.out){
       # insert a check here for a valid directory and filename?
       if(!file.exists("data")) dir.create("data") # make sure there's a folder to write to!
-      utils::write.table(inat_pheno_data, paste("data/inat_phenology_data_", taxon, ".csv", sep=""), sep=",", col.names=TRUE, row.names=FALSE, quote=FALSE)
+      utils::write.table(inat_pheno_data, paste("data/inat_phenology_data_", taxnum, ".csv", sep=""), sep=",", col.names=TRUE, row.names=FALSE, quote=FALSE)
     }
 
     # provide some indication of progress

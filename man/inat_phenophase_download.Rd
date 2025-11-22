@@ -2,35 +2,35 @@
 % Please edit documentation in R/inat_phenophase_download.R
 \name{inat_phenophase_download}
 \alias{inat_phenophase_download}
-\title{Download phenophase-annotated iNaturalist records}
+\title{Download iNaturalist records by annotated phenophase}
 \usage{
 inat_phenophase_download(
-  taxon = NA,
+  taxnum = NA,
   years = 2021:2025,
-  write_out = FALSE,
+  write.out = FALSE,
   max_loc_uncertainty = 1000,
   verbose = TRUE
 )
 }
 \arguments{
-\item{taxon}{Numeric taxon ID for a target taxon in the iNaturalsist database}
+\item{taxnum}{Numeric taxon ID for a target taxon in the iNaturalsist database}
 
 \item{years}{Vector of requested years of observation}
 
-\item{write_out}{Write out a .csv file with the requested records? If TRUE, creates "data/inat_phenology_data_\if{html}{\out{<taxon ID>}}.csv" with the same content as the returned dataframe.}
+\item{write.out}{Write out a .csv file with the requested records? If TRUE, creates "data/inat_phenology_data_\if{html}{\out{<taxon ID>}}.csv" with the same content as the returned dataframe.}
 
 \item{max_loc_uncertainty}{Maximum positional uncertainty for requested records, in meters}
 
 \item{verbose}{If TRUE, provide updates with each year of data downloaded.}
 }
 \value{
-A dataframe with simplified iNaturalist records, by phenophase
+A dataframe with simplified iNaturalist records, by year and phenophase
 }
 \description{
-Download phenophase-annotated iNaturalist records
+Download iNaturalist records by annotated phenophase
 }
 \examples{
-toyon <- inat_phenophase_download(taxon=53405, years=2021)
+toyon <- inat_phenophase_download(taxnum=53405, years=2010:2012)
 
 
 }
